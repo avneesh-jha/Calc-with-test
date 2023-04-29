@@ -5,7 +5,7 @@
 ```npm start```
 
 There is a basic calculator app with the test cases written and to check the test covererage
-
+``` You can try to learn react -testing-library and jest by following this project```
 React App preview 
 ![image](https://user-images.githubusercontent.com/25507849/235319710-e903b1e3-9a03-480d-928c-5624967997d4.png)
 
