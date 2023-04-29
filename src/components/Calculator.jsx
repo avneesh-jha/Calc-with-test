@@ -14,18 +14,34 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
     OPERATORS.includes(defaultOperator) ? defaultOperator : "+"
   );
 
+  const valueA = inputValueA || 0;
+  const valueB = inputValueB || 0;
+
   function getResult() {
     switch (operator) {
       case "+":
-        return sum(inputValueA, inputValueB);
+        return sum(valueA, valueB);
       case "-":
-        return substract(inputValueA, inputValueB);
+        return substract(valueA, valueB);
       case "x":
-        return multiply(inputValueA, inputValueB);
+        return multiply(valueA, valueB);
       case "/":
-        return divide(inputValueA, inputValueB);
+        try {
+          return divideSafely(valueA, valueB);
+        } catch (e) {
+          alert("not divisible by 0");
+        }
+
       default:
         return "No operator provided";
+    }
+  }
+
+  function divideSafely(a, b) {
+    try {
+      return divide(a, b);
+    } catch (err) {
+      return err.message;
     }
   }
   const renderInputA = () => {
@@ -33,7 +49,11 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
       <input
         value={inputValueA}
         type="number"
-        onChange={(e) => setInputValueA(Number.parseFloat(e.target.value))}
+        onChange={(e) =>
+          setInputValueA(
+            e.target.value ? Number.parseFloat(e.target.value) : ""
+          )
+        }
       />
     );
   };
@@ -43,7 +63,11 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
       <input
         value={inputValueB}
         type="number"
-        onChange={(e) => setInputValueB(Number.parseFloat(e.target.value))}
+        onChange={(e) =>
+          setInputValueB(
+            e.target.value ? Number.parseFloat(e.target.value) : ""
+          )
+        }
       />
     );
   };
