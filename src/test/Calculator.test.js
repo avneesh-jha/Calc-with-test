@@ -57,6 +57,24 @@ describe("test with default value in calc component", () => {
     render(<Calculator defaultA={1} defaultB={"0"} defaultOperator={"/"} />);
     expect(getResult()).toBe("not divisible by zero");
   });
+  it("Display a message when no operator is provided", () => {
+    render(<Calculator defaultA={1} defaultB={"0"} defaultOperator={"/"} />);
+    fireEvent.change(screen.getByTestId("operator"), {
+      target: { value: "!" },
+    });
+    expect(getResult()).toBe("No operator provided");
+  });
+
+  it("returns 0 when the inputs are empty", () => {
+    render(<Calculator defaultA={1} defaultB={"0"} defaultOperator={"x"} />);
+    fireEvent.change(screen.getByTestId("inputA"), {
+      target: { value: "" },
+    });
+    fireEvent.change(screen.getByTestId("inputB"), {
+      target: { value: "" },
+    });
+    expect(getResult()).toBe("0");
+  });
 });
 
 function getCalculator() {
