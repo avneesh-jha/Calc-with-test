@@ -47,6 +47,7 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
   const renderInputA = () => {
     return (
       <input
+        data-testid="inputA"
         value={inputValueA}
         type="number"
         onChange={(e) =>
@@ -61,6 +62,7 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
   const renderInputB = () => {
     return (
       <input
+        data-testid="inputB"
         value={inputValueB}
         type="number"
         onChange={(e) =>
@@ -76,6 +78,7 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
     return (
       <div>
         <select
+          data-testid="operator"
           value={operator}
           className="form-select"
           onChange={(e) => setOperator(e.target.value)}
@@ -95,7 +98,7 @@ export function Calculator({ defaultA, defaultB, defaultOperator }) {
       {renderSelectBox()}
       {renderInputB()}
       <h2 style={{ marginTop: 20 }}>Result</h2>
-      {getResult()}
+      <span data-testid="result">{getResult()}</span>
     </>
   );
 }
